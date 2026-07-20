@@ -12,7 +12,7 @@
 
 
 module "sg" {
-    source = "git::https://github.com/SKR-2021/terraform-38-39-40.git?ref=main//terraform_aws_sg"
+    source = "git::https://github.com/SKR-2021/terraform-38-39-40.git//terraform_aws_sg"
     project_name    =   var.project_name  
     environment     =   var.environment
     sg_name         =   "mongodb-sg"
