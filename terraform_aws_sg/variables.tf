@@ -24,6 +24,6 @@ variable "vpc_id" {
 }
 
 variable "sg_tags" {
-    type = map
+    type = map(any) 
     default = ""
 }
