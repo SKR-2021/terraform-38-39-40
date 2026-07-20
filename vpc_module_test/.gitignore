@@ -1,0 +1,12 @@
+# Terraform artifacts
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Logs & temp
+crash.log
+*.tfvars
+*.tfvars.json
+.terraform
+# IDE
