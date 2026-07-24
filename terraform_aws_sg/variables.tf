@@ -1,16 +1,16 @@
 variable "project_name" {
     type = string
-    default = ""
+    
 }
 
 variable "environment" {
     type = string
-    default = ""
+    
 }
 
 variable "sg_name" {
     type = string
-    default = ""
+   
 }
 
 variable "sg_description" {
@@ -20,7 +20,7 @@ variable "sg_description" {
 
 variable "vpc_id" {
     type = string
-    default = ""
+    
 }
 
 variable "sg_tags" {
