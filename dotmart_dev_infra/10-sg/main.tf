@@ -13,22 +13,24 @@
 
 module "sg" {
     count = length(var.sg_names)
+    # for_each = toset(var.sg_names)
     source = "git::https://github.com/SKR-2021/terraform-38-39-40.git//terraform_aws_sg"
     project_name    =   var.project_name  
     environment     =   var.environment
-    sg_name         =   var.sg_names[count.index]
+    sg_name       =   var.sg_names[count.index]
+    # sg_name         =   each.key
     sg_description  =   "Created for ${var.sg_names[count.index]}"
+    # sg_description  =   "Created for ${each.key}"
     vpc_id          =   local.vpc_id
-
 }
 
 # Frontend accepting traffic from frontend alb
-# resource "aws_security_group_rule" "frontend_frontend_alb" {
-#     type = "ingress" 
-#     security_group_id = module.sg[9].sg_id
-#     source_security_group_id   = module.sg[11].sg_id
-#     from_port         = 80
-#     protocol       = "tcp"
-#     to_port           = 80
-# }
+resource "aws_security_group_rule" "frontend_frontend_alb" {
+    type = "ingress" 
+    security_group_id = module.sg[9].sg_id
+    source_security_group_id   = module.sg[11].sg_id
+    from_port         = 80
+    protocol       = "tcp"
+    to_port           = 80
+}
 
