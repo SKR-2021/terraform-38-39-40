@@ -22,6 +22,7 @@ resource "terraform_data" "mongodb" {
     user        =   "ec2-user"
     password    =   "DevOps321"
     host        =    aws_instance.mongodb.private_ip
+  }
 }
 
 #   provisioner "file" {
