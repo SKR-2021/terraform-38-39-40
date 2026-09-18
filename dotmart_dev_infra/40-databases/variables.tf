@@ -10,6 +10,6 @@ variable "environment" {
 #     default = "Z09150472BEG29NERJFM7"
 # }
 
-# variable "domain_name" {
-#     default = "dso86s.xyz" 
-# }
+variable "domain_name" {
+    default = "dso86s.xyz" 
+}
