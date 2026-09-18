@@ -16,9 +16,9 @@ data "aws_ami" "dotmart" {
   }
 }
 
-data "aws_route53_zone" "main" {
-  name = var.domain_name
-}
+# data "aws_route53_zone" "main" {
+#   name = var.domain_name
+# }
 
 data "aws_ssm_parameter" "mongodb_sg_id" {
   name = "/${var.project_name}/${var.environment}/mongodb_sg_id"
