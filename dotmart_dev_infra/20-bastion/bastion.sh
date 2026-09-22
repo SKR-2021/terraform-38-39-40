@@ -2,7 +2,7 @@
 
 # Growing the /home volume for terraform purpose 
 growpart /dev/nvme0n1 4
-lvextend -L +10G /dev/mapper/RootVG-homeVol
+lvextend -r -L +10G /dev/mapper/RootVG-homeVol
 xfs_growfs /home
 
 sudo yum install -y yum-utils
