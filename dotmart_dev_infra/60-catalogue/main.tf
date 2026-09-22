@@ -134,8 +134,9 @@ resource "aws_autoscaling_group" "catalogue" {
     version = aws_launch_template.catalogue.latest_version
   }
   vpc_zone_identifier = local.private_subnet_ids
+  target_group_arns = [aws_lb_target_group.catalogue.arn]
 
-  dynamic "tag" {
+  dynamic "tag" {     # we will get the iterator with name as tag 
     for_each = merge(
       local.common_tags,
       {
@@ -154,3 +155,17 @@ resource "aws_autoscaling_group" "catalogue" {
   }
 }
 
+resource "aws_autoscaling_policy" "example" {
+  autoscaling_group_name = "aws_autoscaling_group.catalogue.name"
+  name                   = "${local.common_name_suffix}-catalogue-asg"
+  policy_type            = "TargetTrackingScaling"
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 75.0
+  }
+
+}
