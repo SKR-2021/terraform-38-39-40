@@ -1,11 +1,11 @@
 variable "project_name" {
-    default = "dotmart"
+  default = "dotmart"
 }
 
 variable "environment" {
-    default = "dev"
+  default = "dev"
 }
 
 variable "domain_name" {
-    default = "dso86s.xyz" 
+  default = "dso86s.xyz"
 }
