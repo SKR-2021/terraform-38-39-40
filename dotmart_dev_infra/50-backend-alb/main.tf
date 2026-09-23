@@ -15,7 +15,6 @@ resource "aws_lb" "backend_alb" {
     }
   )
 }
-
 # Backend ALB listing on port number 80
 resource "aws_lb_listener" "backend_alb" {
   load_balancer_arn = aws_lb.backend_alb.arn
@@ -32,10 +31,9 @@ resource "aws_lb_listener" "backend_alb" {
     }
   }
 }
-
 resource "aws_route53_record" "backend_alb" {
   zone_id = data.aws_route53_zone.main.id
-  name    = "*.backend-alb-${{var.environment}}.${{var.domain_name}}"
+  name    = "*.backend-alb-${var.environment}.${var.domain_name}"
   type    = "A"
 
   alias {
