@@ -63,7 +63,7 @@ resource "aws_ami_from_instance" "catalogue" {
 }
 
 resource "aws_lb_target_group" "catalogue" {
-  name     = "${local.common_name_suffix}-catalogue-ami"
+  name     = "${local.common_name_suffix}-catalogue-tg"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = local.vpc_id
@@ -82,7 +82,7 @@ resource "aws_lb_target_group" "catalogue" {
 }
 
 resource "aws_launch_template" "catalogue" {
-  name     = "${local.common_name_suffix}-catalogue-ami"
+  name     = "${local.common_name_suffix}-catalogue-template"
   image_id = aws_ami_from_instance.catalogue.id
 
   instance_initiated_shutdown_behavior = "terminate"
@@ -157,7 +157,7 @@ resource "aws_autoscaling_group" "catalogue" {
 
 resource "aws_autoscaling_policy" "catalogue" {
   autoscaling_group_name = aws_autoscaling_group.catalogue.name
-  name                   = "${local.common_name_suffix}-catalogue-plcy"
+  name                   = "${local.common_name_suffix}-catalogue-asp"
   policy_type            = "TargetTrackingScaling"
 
   target_tracking_configuration {
@@ -168,4 +168,20 @@ resource "aws_autoscaling_policy" "catalogue" {
     target_value = 75.0
   }
 
+}
+
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = local.backend_alb_listener_arn
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
+    }
+  }
 }
