@@ -29,7 +29,7 @@ resource "aws_route53_record" "dotmart" {
   records         = [each.value.record]
   ttl             = 5
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.main.id
+  zone_id         = var.zone_id
 }
 
 
