@@ -135,7 +135,7 @@ resource "aws_autoscaling_group" "catalogue" {
     version = aws_launch_template.catalogue.latest_version
   }
   vpc_zone_identifier = [local.private_subnet_ids]
-  target_group_arns = [aws_lb_target_group.catalogue.arn]
+  target_group_arns   = [aws_lb_target_group.catalogue.arn]
 
   instance_refresh {
     strategy = "Rolling"
@@ -146,7 +146,7 @@ resource "aws_autoscaling_group" "catalogue" {
     triggers = ["launch_template"]
   }
 
-  dynamic "tag" {     # we will get the iterator with name as tag 
+  dynamic "tag" { # we will get the iterator with name as tag 
     for_each = merge(
       local.common_tags,
       {
@@ -196,14 +196,14 @@ resource "aws_lb_listener_rule" "catalogue" {
   }
 }
 
-# resource "terraform_data" "catalogue_local" {
-#   triggers_replace = [
-#     aws_instance.catalogue.id
-#   ]
+resource "terraform_data" "catalogue_local" {
+  triggers_replace = [
+    aws_instance.catalogue.id
+  ]
 
-#   depends_on = [ aws_autoscaling_policy.catalogue ]
+  depends_on = [ aws_autoscaling_policy.catalogue ]
 
-#   provisioner "local-exec" {
-#     command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
-#   }
-# }
+  provisioner "local-exec" {
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
+  }
+}
