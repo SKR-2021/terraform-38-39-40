@@ -14,7 +14,7 @@ resource "aws_acm_certificate" "dotmart" {
     create_before_destroy = true
   }
 }
-
+# Create the DNS validation CNAME record in Route 53.
 resource "aws_route53_record" "dotmart" {
   for_each = {
     for dvo in aws_acm_certificate.dotmart.domain_validation_options : dvo.domain_name => {
@@ -32,7 +32,7 @@ resource "aws_route53_record" "dotmart" {
   zone_id         = var.zone_id
 }
 
-
+# Wait for ACM to validate the certificate using the DNS record.
 resource "aws_acm_certificate_validation" "dotmart" {
   certificate_arn         = aws_acm_certificate.dotmart.arn
   validation_record_fqdns = [for record in aws_route53_record.dotmart : record.fqdn]
