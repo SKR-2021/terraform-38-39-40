@@ -1,5 +1,5 @@
 resource "aws_lb" "frontend_alb" {
-  name               = "${local.comman_name_suffix}-backend-alb" # dotmart-dev-backend-alb
+  name               = "${local.comman_name_suffix}-frontend-alb" # dotmart-dev-frontend-alb
   internal           = false
   load_balancer_type = "application"
   security_groups    = [local.frontend_alb_sg_id]
