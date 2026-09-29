@@ -36,6 +36,8 @@ resource "aws_route53_record" "backend_alb" {
   name    = "*.backend-alb-${var.environment}.${var.domain_name}"
   type    = "A"
 
+  allow_overwrite = true
+  
   alias {
     # These are ALB details, not our domain details 
     name                   = aws_lb.backend_alb.dns_name
