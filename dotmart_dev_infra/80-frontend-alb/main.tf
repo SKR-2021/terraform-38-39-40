@@ -36,7 +36,7 @@ resource "aws_lb_listener" "frontend_alb" {
 }
 
 resource "aws_route53_record" "frontend_alb" {
-  zone_id = var.zone_id
+  zone_id = data.aws_route53_zone.main.id
   name    = "dotmart-${var.environment}.${var.domain_name}"
   type    = "A"
 
