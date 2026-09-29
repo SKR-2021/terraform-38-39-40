@@ -40,6 +40,8 @@ resource "aws_route53_record" "frontend_alb" {
   name    = "dotmart-${var.environment}.${var.domain_name}"
   type    = "A"
 
+  allow_overwrite = true
+
   alias {
     # These are ALB details, not our domain details 
     name                   = aws_lb.frontend_alb.dns_name
