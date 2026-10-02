@@ -12,5 +12,5 @@ module "components" {
     component = each.key
     rule_priority = each.value.rule_priority
     instance_type = var.instance_type
-    domain_name = var.domain_name
+    
 }

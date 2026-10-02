@@ -10,9 +10,6 @@ variable "rule_priority" {
     default = 10
 }
 
-variable "domain_name" {
-    default = "dso86s.xyz"
-}
 
 variable "components" {
     default = {
