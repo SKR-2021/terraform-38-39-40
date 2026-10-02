@@ -188,10 +188,10 @@ resource "aws_security_group_rule" "catalogue_cart" {
     to_port           = 8080
 }
 
-resource "aws_security_group_rule" "shipping_cart" {
+resource "aws_security_group_rule" "cart_shipping" {
     type = "ingress" 
-    security_group_id = local.shipping_sg_id
-    source_security_group_id = local.cart_sg_id
+    security_group_id = local.cart_sg_id
+    source_security_group_id = local.shipping_sg_id
     from_port         = 8080
     protocol          = "tcp"
     to_port           = 8080
