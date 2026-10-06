@@ -7,7 +7,7 @@ variable "environment" {
 }
 
 variable "domain_name" {
-  default = "dso86s.xyz"
+  default = "dso86.xyz"
 }
 
 # variable "zone_id" {
