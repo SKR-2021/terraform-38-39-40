@@ -1,7 +1,14 @@
 variable "project_name" {
-    default = "dotmart"
+  default = "dotmart"
 }
 
 variable "environment" {
-    default = "dev"
+  default = "dev"
+}
+
+variable "components" {
+  default = {
+
+  }
+
 }
